@@ -118,9 +118,79 @@ filterBtns.forEach(btn => {
 // =============================================
 const quoteForm = document.getElementById('quoteForm');
 if (quoteForm) {
+
+  function showFormError(msg) {
+    const el = document.getElementById('formError');
+    if (!el) return;
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Clear error on input
+  quoteForm.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', () => clearError(el.id));
+    el.addEventListener('change', () => clearError(el.id));
+  });
+
+  function showError(fieldId, msg) {
+    const el = document.getElementById(fieldId);
+    const err = document.getElementById('err-' + fieldId);
+    if (el) el.style.borderColor = '#e53e3e';
+    if (err) { err.textContent = msg; err.style.display = 'block'; }
+  }
+
+  function clearError(fieldId) {
+    const el = document.getElementById(fieldId);
+    const err = document.getElementById('err-' + fieldId);
+    if (el) el.style.borderColor = '';
+    if (err) { err.textContent = ''; err.style.display = 'none'; }
+  }
+
+  function validate() {
+    let valid = true;
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const company   = document.getElementById('company').value.trim();
+    const product   = document.getElementById('productType').value;
+    const quantity  = document.getElementById('quantity').value.trim();
+
+    if (!firstName) { showError('firstName', 'First name is required'); valid = false; }
+    if (!lastName)  { showError('lastName',  'Last name is required');  valid = false; }
+
+    if (!email) {
+      showError('email', 'Email is required'); valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('email', 'Enter a valid email address'); valid = false;
+    }
+
+    if (!phone) {
+      showError('phone', 'Phone number is required'); valid = false;
+    } else if (!/^[+\d\s\-()]{7,}$/.test(phone)) {
+      showError('phone', 'Enter a valid phone number'); valid = false;
+    }
+
+    if (!company) { showError('company', 'Company name is required'); valid = false; }
+
+    if (!product) { showError('productType', 'Please select a product type'); valid = false; }
+
+    if (!quantity) {
+      showError('quantity', 'Quantity is required'); valid = false;
+    } else if (isNaN(quantity) || parseInt(quantity) < 1) {
+      showError('quantity', 'Enter a valid quantity'); valid = false;
+    }
+
+    return valid;
+  }
+
   quoteForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = quoteForm.querySelector('[type=submit]');
+    if (!validate()) return;
+
+    const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
@@ -138,14 +208,14 @@ if (quoteForm) {
       } else {
         const json = await res.json();
         const msg = json.errors ? json.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
+        showFormError(msg);
         btn.disabled = false;
-        btn.textContent = '✉ Send Quote Request';
-        alert(msg);
+        btn.innerHTML = '&#9993;&nbsp; Send Quote Request';
       }
     } catch (err) {
+      showFormError('Network error. Please check your connection and try again.');
       btn.disabled = false;
-      btn.textContent = '✉ Send Quote Request';
-      alert('Network error. Please check your connection and try again.');
+      btn.innerHTML = '&#9993;&nbsp; Send Quote Request';
     }
   });
 }

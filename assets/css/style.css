@@ -628,6 +628,22 @@ p  { color: var(--gray); line-height: 1.8; }
 }
 .form-group textarea { resize: vertical; min-height: 110px; }
 
+.field-error {
+  display: none;
+  color: #c53030;
+  font-size: 0.78rem;
+  margin-top: 0.25rem;
+}
+.form-error-banner {
+  background: #fff5f5;
+  border: 1.5px solid #fc8181;
+  color: #c53030;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
 .form-success {
   display: none;
   text-align: center;
@@ -1141,49 +1157,135 @@ p  { color: var(--gray); line-height: 1.8; }
 }
 
 /* =============================================
-   RESPONSIVE
+   RESPONSIVE — TABLET (max 900px)
    ============================================= */
 @media (max-width: 900px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2.5rem;
-  }
+  /* Old hero */
+  .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
   .hero-desc { max-width: 100%; }
   .hero-actions { justify-content: center; }
   .hero-visual { max-width: 420px; margin: 0 auto; }
-  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
-  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .simple-hero-inner { grid-template-columns: 1fr; }
-  .simple-hero { text-align: center; }
+
+  /* Simple hero */
+  .simple-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .simple-hero { text-align: center; padding: 6rem 1.5rem 3rem; }
+  .simple-hero-img { max-width: 480px; margin: 0 auto; }
+  .hero-product-img { max-height: 260px; }
   .contact-quick { justify-content: center; }
+  .hero-badges { justify-content: center; }
+  .hero-actions { justify-content: center; }
+
+  /* Stats */
+  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+  /* Products */
   .product-detail-card { grid-template-columns: 1fr; gap: 1.5rem; }
+  .product-showcase { grid-template-columns: repeat(2, 1fr); }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .contact-strip-inner { flex-direction: column; text-align: center; }
   .contact-strip-actions { justify-content: center; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  /* Steps */
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* =============================================
+   RESPONSIVE — MOBILE (max 600px)
+   ============================================= */
 @media (max-width: 600px) {
-  .navbar { padding: 0 1.25rem; }
+  /* Navbar */
+  .navbar { padding: 0 1rem; height: 64px; }
+  .navbar-logo-svg { height: 44px; }
   .nav-links { display: none; }
   .nav-links.open {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 76px;
+    top: 64px;
     left: 0; right: 0;
     background: var(--navy-dark);
-    padding: 1rem 1.5rem 1.5rem;
-    gap: 0.25rem;
+    padding: 0.75rem 1rem 1.25rem;
+    gap: 0.1rem;
     border-top: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    z-index: 999;
   }
-  .nav-links.open a { padding: 0.65rem 0.75rem; }
+  .nav-links.open li { width: 100%; }
+  .nav-links.open a { display: block; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.95rem; }
+  .nav-links.open .btn { margin-top: 0.5rem; text-align: center; justify-content: center; }
   .hamburger { display: flex; }
+
+  /* Hero */
+  .simple-hero { padding: 5.5rem 1rem 2.5rem; text-align: center; }
+  .simple-hero-inner { gap: 1.75rem; }
+  .simple-hero-text h1 { font-size: 1.75rem; }
+  .simple-hero-desc { font-size: 0.95rem; }
+  .hero-badges { justify-content: center; gap: 0.4rem; }
+  .hero-tag { font-size: 0.72rem; padding: 0.35rem 0.7rem; }
+  .hero-actions { flex-direction: column; align-items: center; gap: 0.75rem; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .contact-quick { flex-direction: column; align-items: center; gap: 0.6rem; }
+  .simple-hero-img { display: none; } /* hide on small phones — saves space */
+
+  /* Page hero */
+  .page-hero { padding: 5.5rem 1rem 2.5rem; }
+  .page-hero h1 { font-size: 1.6rem; }
+
+  /* Stats */
+  .stats-bar { padding: 1.5rem 1rem; }
+  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .stat-number { font-size: 1.7rem; }
+  .stat-label { font-size: 0.72rem; }
+
+  /* Sections */
+  .section { padding: 2.5rem 1rem; }
+  .section-header { margin-bottom: 2rem; }
+
+  /* Products showcase */
+  .product-showcase { grid-template-columns: 1fr; }
+  .showcase-card .showcase-img { height: 180px; }
+
+  /* Product detail */
+  .product-detail-card { gap: 1rem; }
+  .product-main-img { height: 220px; }
+  .photo-thumb-row { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+  .product-thumb-img { height: 65px; }
+  .product-detail-info h2 { font-size: 1.3rem; }
+  .spec-table { font-size: 0.82rem; }
+  .spec-table th, .spec-table td { padding: 0.5rem 0.6rem; }
+
+  /* Steps */
+  .steps-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .step-card { padding: 1.25rem; }
+
+  /* Contact strip */
+  .contact-strip { padding: 1.5rem 1rem; }
+  .contact-strip-inner { gap: 1rem; }
+  .contact-strip-actions { flex-direction: column; width: 100%; }
+  .contact-strip-actions .btn { width: 100%; justify-content: center; }
+
+  /* Contact form */
   .form-row { grid-template-columns: 1fr; }
-  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .section { padding: 3.5rem 1.25rem; }
-  .photo-thumb-row { grid-template-columns: repeat(3, 1fr); }
-  .simple-hero { padding: 6rem 1.25rem 3rem; }
+  .quote-form { padding: 1.5rem 1rem; }
+
+  /* Industries */
+  .industries-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Why us */
+  .why-us-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+  /* CTA banner */
+  .cta-banner { padding: 3rem 1rem; }
+  .cta-banner-actions { flex-direction: column; align-items: center; }
+  .cta-banner-actions .btn { width: 100%; justify-content: center; }
+
+  /* Footer */
+  .footer { padding: 2.5rem 1rem 1.25rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.35rem; }
 }

@@ -13,7 +13,7 @@
 <body>
 
   <!-- ======= NAVBAR ======= -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main navigation">
     <a href="index.html" class="navbar-brand">
       <img src="static/logo-light.svg" alt="Super Plastics" class="navbar-logo-svg" />
     </a>
@@ -30,7 +30,7 @@
 
   <!-- ======= PAGE HERO ======= -->
   <section class="page-hero">
-    <nav class="breadcrumb">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span>/</span>
       <span>Contact &amp; Quote</span>
@@ -54,7 +54,7 @@
             <div class="contact-detail-icon">&#128241;</div>
             <div class="contact-detail-text">
               <strong>Phone / WhatsApp</strong>
-              <span>+91 84199 80735</span>
+              <span>+91 98199 66036</span>
             </div>
           </div>
 
@@ -70,7 +70,7 @@
             <div class="contact-detail-icon">&#127968;</div>
             <div class="contact-detail-text">
               <strong>Factory Address</strong>
-              <span>Plot No. XX, Industrial Area,<br/>City, State — 000 000</span>
+              <span>Goregaon, Mumbai,<br/>Maharashtra — 400 063, India</span>
             </div>
           </div>
 
@@ -95,56 +95,77 @@
             <h3>Request a Quote</h3>
             <p class="form-subtitle">All fields marked * are required</p>
 
-            <form id="quoteForm" novalidate>
+            <form id="quoteForm">
               <div class="form-row">
                 <div class="form-group">
                   <label for="firstName">First Name *</label>
-                  <input type="text" id="firstName" name="firstName" placeholder="Rahul" required />
+                  <input type="text" id="firstName" name="firstName" placeholder="Rahul" />
+                  <span class="field-error" id="err-firstName"></span>
                 </div>
                 <div class="form-group">
                   <label for="lastName">Last Name *</label>
-                  <input type="text" id="lastName" name="lastName" placeholder="Sharma" required />
+                  <input type="text" id="lastName" name="lastName" placeholder="Sharma" />
+                  <span class="field-error" id="err-lastName"></span>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="email">Email Address *</label>
-                  <input type="email" id="email" name="email" placeholder="you@company.com" required />
+                  <input type="email" id="email" name="email" placeholder="you@company.com" />
+                  <span class="field-error" id="err-email"></span>
                 </div>
                 <div class="form-group">
                   <label for="phone">Phone / WhatsApp *</label>
-                  <input type="tel" id="phone" name="phone" placeholder="+91 98000 00000" required />
+                  <input type="tel" id="phone" name="phone" placeholder="+91 98199 66036" />
+                  <span class="field-error" id="err-phone"></span>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="company">Company / Business Name *</label>
-                <input type="text" id="company" name="company" placeholder="ABC Jewellers Pvt. Ltd." required />
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="company">Company / Business Name *</label>
+                  <input type="text" id="company" name="company" placeholder="ABC Jewellers Pvt. Ltd." />
+                  <span class="field-error" id="err-company"></span>
+                </div>
+                <div class="form-group">
+                  <label for="country">Country *</label>
+                  <select id="country" name="country">
+                    <option value="India" selected>India</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="Nepal">Nepal</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="UAE">UAE</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="productType">Product Type *</label>
-                  <select id="productType" name="productType" required>
+                  <select id="productType" name="productType">
                     <option value="" disabled selected>Select product…</option>
-                    <option value="jewellery-standup">Jewellery Stand-Up Pouch</option>
-                    <option value="jewellery-blister">Jewellery Display Blister Pack</option>
-                    <option value="standup-general">Stand-Up Pouch (General)</option>
-                    <option value="flat-pouch">Flat / Pillow Pouch</option>
-                    <option value="clamshell">Clamshell Blister Pack</option>
-                    <option value="custom">Custom / Other</option>
+                    <option value="Jewellery Stand-Up Pouch">Jewellery Stand-Up Pouch</option>
+                    <option value="Jewellery Display Blister Pack">Jewellery Display Blister Pack</option>
+                    <option value="Stand-Up Pouch (General)">Stand-Up Pouch (General)</option>
+                    <option value="Flat / Pillow Pouch">Flat / Pillow Pouch</option>
+                    <option value="Clamshell Blister Pack">Clamshell Blister Pack</option>
+                    <option value="Mobile Cover Pouch">Mobile Cover Pouch</option>
+                    <option value="Custom / Other">Custom / Other</option>
                   </select>
+                  <span class="field-error" id="err-productType"></span>
                 </div>
                 <div class="form-group">
-                  <label for="quantity">Estimated Quantity *</label>
-                  <select id="quantity" name="quantity" required>
-                    <option value="" disabled selected>Select range…</option>
-                    <option value="2000-10000">2,000 – 10,000 pieces</option>
-                    <option value="10000-50000">10,000 – 50,000 pieces</option>
-                    <option value="50000-200000">50,000 – 2,00,000 pieces</option>
-                    <option value="200000+">2,00,000+ pieces</option>
-                  </select>
+                  <label for="quantity">Quantity (pieces) *</label>
+                  <input type="number" id="quantity" name="quantity" placeholder="e.g. 5000" min="1" />
+                  <span class="field-error" id="err-quantity"></span>
                 </div>
               </div>
 
@@ -158,7 +179,9 @@
                 <textarea id="message" name="message" placeholder="Describe your product, material preferences, print requirements, or anything else we should know…"></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:0.9rem; font-size:1rem;">
+              <div id="formError" class="form-error-banner" style="display:none;"></div>
+
+              <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; justify-content:center; padding:0.9rem; font-size:1rem;">
                 &#9993;&nbsp; Send Quote Request
               </button>
 
@@ -172,7 +195,7 @@
               <div class="success-icon">&#10003;</div>
               <h4>Quote Request Received!</h4>
               <p>Thank you. We'll review your requirements and get back to you within <strong>24 business hours</strong> with a detailed quote.</p>
-              <p style="margin-top:0.75rem; font-size:0.85rem;">In the meantime, feel free to call or WhatsApp us at <strong>+91 84199 80735</strong></p>
+              <p style="margin-top:0.75rem; font-size:0.85rem;">In the meantime, feel free to call or WhatsApp us at <strong>+91 98199 66036</strong></p>
             </div>
           </div>
         </div>
@@ -223,7 +246,7 @@
   </footer>
 
   <!-- WhatsApp Float -->
-  <a href="https://wa.me/918419980735?text=Hello%2C%20I%20am%20interested%20in%20your%20packaging%20products.%20Please%20share%20details." class="whatsapp-float" target="_blank" rel="noopener">
+  <a href="https://wa.me/919819966036?text=Hello%2C%20I%20am%20interested%20in%20your%20packaging%20products.%20Please%20share%20details." class="whatsapp-float" target="_blank" rel="noopener">
     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 2C8.268 2 2 8.268 2 16c0 2.468.67 4.78 1.836 6.77L2 30l7.436-1.814A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="#fff"/>
       <path d="M16 4.5C9.649 4.5 4.5 9.649 4.5 16c0 2.163.584 4.19 1.603 5.927l.24.41-1.018 3.716 3.82-.999.396.234A11.47 11.47 0 0016 27.5c6.351 0 11.5-5.149 11.5-11.5S22.351 4.5 16 4.5z" fill="#25D366"/>
