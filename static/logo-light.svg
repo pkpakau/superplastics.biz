@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 72" fill="none">
+  <!-- Pouch body -->
+  <rect x="4" y="18" width="52" height="46" rx="7" fill="rgba(255,255,255,0.18)"/>
+  <rect x="4" y="18" width="52" height="46" rx="7" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <!-- Zipper strip -->
+  <rect x="4" y="14" width="52" height="10" rx="4" fill="#c9922a"/>
+  <!-- Zipper dots -->
+  <circle cx="16" cy="19" r="2" fill="#0d2547" opacity="0.5"/>
+  <circle cx="24" cy="19" r="2" fill="#0d2547" opacity="0.5"/>
+  <circle cx="32" cy="19" r="2" fill="#0d2547" opacity="0.5"/>
+  <circle cx="40" cy="19" r="2" fill="#0d2547" opacity="0.5"/>
+  <circle cx="48" cy="19" r="2" fill="#0d2547" opacity="0.5"/>
+  <!-- Zipper pull tab -->
+  <rect x="7" y="11" width="8" height="6" rx="2" fill="#e8b84b"/>
+  <rect x="9" y="9" width="4" height="4" rx="1" fill="#e8b84b"/>
+  <!-- SP monogram -->
+  <text x="30" y="48" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-1">SP</text>
+  <!-- Shine -->
+  <rect x="4" y="24" width="14" height="34" rx="4" fill="white" opacity="0.06"/>
+
+  <!-- Company name - white for dark bg -->
+  <text x="72" y="38" font-family="'Inter', 'Segoe UI', sans-serif" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="-0.5">SUPER</text>
+  <text x="72" y="58" font-family="'Inter', 'Segoe UI', sans-serif" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="-0.5">PLASTICS</text>
+
+  <!-- Gold underline accent -->
+  <rect x="72" y="62" width="90" height="3" rx="1.5" fill="#c9922a"/>
+
+</svg>

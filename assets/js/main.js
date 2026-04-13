@@ -1,4 +1,17 @@
 // =============================================
+// BROKEN IMAGE FALLBACK
+// =============================================
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('error', function() {
+    const isThumb = this.classList.contains('product-thumb-img');
+    const ph = document.createElement('div');
+    ph.className = 'photo-placeholder' + (isThumb ? ' thumb' : ' large');
+    ph.innerHTML = '<span class="photo-icon">&#128247;</span><span>Photo coming soon</span>';
+    this.replaceWith(ph);
+  });
+});
+
+// =============================================
 // NAVBAR — scroll effect + mobile toggle
 // =============================================
 const navbar = document.querySelector('.navbar');
@@ -111,11 +124,29 @@ if (quoteForm) {
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
-    // Simulate async send (replace with actual endpoint)
-    await new Promise(r => setTimeout(r, 1200));
+    try {
+      const data = new FormData(quoteForm);
+      const res = await fetch('https://formspree.io/f/myklyyvz', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
 
-    quoteForm.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+      if (res.ok) {
+        quoteForm.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        const json = await res.json();
+        const msg = json.errors ? json.errors.map(e => e.message).join(', ') : 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = '✉ Send Quote Request';
+        alert(msg);
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = '✉ Send Quote Request';
+      alert('Network error. Please check your connection and try again.');
+    }
   });
 }
 
